@@ -28,10 +28,7 @@ SECRET_KEY = os.getenv(
 
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = os.getenv(
-    "ALLOWED_HOSTS",
-    "127.0.0.1,localhost"
-).split(",")
+ALLOWED_HOSTS = ["*"]
 
 
 # =========================================================
@@ -212,14 +209,8 @@ SIMPLE_JWT = {
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
 else:
-    CORS_ALLOWED_ORIGINS = [
-        origin.strip()
-        for origin in os.getenv(
-            "CORS_ALLOWED_ORIGINS",
-            ""
-        ).split(",")
-        if origin.strip()
-    ]
+    # Portfolio demo: Allow all origins so Vercel frontend can connect easily
+    CORS_ALLOW_ALL_ORIGINS = True
 
 
 # =========================================================

@@ -6,11 +6,15 @@ class Chat(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="chats"
+        related_name="chats",
+        null=True,
+        blank=True
     )
     question = models.TextField()
     answer = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    session_id = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.question[:30]}"
+        user_display = self.user.username if self.user else "Anonymous"
+        return f"{user_display} - {self.question[:30]}"
