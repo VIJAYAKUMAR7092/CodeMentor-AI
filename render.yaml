@@ -1,0 +1,9 @@
+﻿services:
+  - type: web
+    name: codementor-ai-backend
+    env: python
+    buildCommand: bash render-build.sh
+    startCommand: cd backend && gunicorn config.wsgi:application
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
